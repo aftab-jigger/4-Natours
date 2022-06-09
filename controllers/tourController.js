@@ -5,6 +5,7 @@ const tours = JSON.parse(
 );
 console.log('Tours Length > ', tours.length);
 
+// Middlewares
 exports.checkID = (req, res, next, val) => {
   console.log('Tour id is > ', val);
   if (val > tours.length) {
@@ -12,6 +13,16 @@ exports.checkID = (req, res, next, val) => {
     return res.status(404).json({
       status: 'failed',
       message: 'Invalid ID',
+    });
+  }
+  next();
+};
+exports.checkBody = (req, res, next) => {
+  // This middleware will checkout the name and price of a tour before creation
+  if (!req.body.name || !req.body.price) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'Missing name or price',
     });
   }
   next();
@@ -41,7 +52,7 @@ exports.createTour = (req, res) => {
   console.log('Updated Tours Length > ', tours.length);
 
   fs.writeFile(
-    `${__dirname}/dev-data/data/tours-simple.json`,
+    `${__dirname}/../dev-data/data/tours-simple.json`,
     JSON.stringify(tours),
     (error) => {
       if (error) throw error;
