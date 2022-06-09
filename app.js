@@ -6,6 +6,7 @@ const userRouter = require('./routes/userRoutes');
 
 // Built-in, Custom Middlwares & Third Part Middleware
 app.use(express.json());
+app.use(express.static('public'));
 app.use((req, res, next) => {
   console.log("Hi, I'm from middleware ");
   next();
