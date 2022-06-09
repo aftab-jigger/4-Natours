@@ -23,8 +23,4 @@ app.use(morgan('dev'));
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 
-// ================= Start Server =============================
-const port = 8080;
-app.listen(port, () => {
-  console.log(`App is listening on port ${port}`);
-});
+module.exports = app;
