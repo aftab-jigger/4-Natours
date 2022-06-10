@@ -5,3 +5,5 @@ dev-data/templates/
 dev-data/data/*
 
 public/img/
+
+.env

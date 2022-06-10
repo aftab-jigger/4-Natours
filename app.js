@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+
 const app = express();
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -16,7 +17,10 @@ app.use((req, res, next) => {
   console.log(req.requestTime);
   next();
 });
-app.use(morgan('dev'));
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 // ===========================================
 
 // ================= Routes =============================
